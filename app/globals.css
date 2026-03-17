@@ -1,26 +1,107 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Brand Colors */
+  --color-brand: #6cee2b;
+  --color-parchment: #fcfaf2;
+  --color-sumi: #1a1a1a;
+  --color-wood: #4a3728;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Noto Serif JP", serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Border Radii */
+  --radius-eight: 8px;
+
+  /* Custom Breakpoints (Optional) */
+  --breakpoint-xs: 380px;
+
+  /* Animations & Keyframes */
+  @keyframes soft-fade-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes soft-scale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes float-zen {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+  
+  --animate-soft-fade-up: soft-fade-up 1.2s ease-out forwards;
+  --animate-float: float-zen 6s ease-in-out infinite;
+  --animate-scroll-bounce: float-zen 3s ease-in-out infinite;
+
+
+  @keyframes slide-left-door {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
+    }
+    @keyframes slide-right-door {
+      from { transform: translateX(0); }
+      to { transform: translateX(100%); }
+    }
+  
+  /* Slower, more cinematic timing (2.2s) with a 0.3s delay */
+  --animate-shoji-left: slide-left-door 2.2s cubic-bezier(0.7, 0, 0.3, 1) 0.3s forwards;
+  --animate-shoji-right: slide-right-door 2.2s cubic-bezier(0.7, 0, 0.3, 1) 0.3s forwards;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* --- Custom Utilities --- */
+
+@utility paper-texture {
+  background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAcUiqRkF7iHJW_JgUpIWXvzexjP7QbbMo8LBaL9VLSOJKFt5j4lVTmoZMTbjQQktK5nRoDTbfeuKt6DwFvobHDbDRWkJjTx1cs1D411Wfq1mh24CG3eZREYU9SEy75CV6FtU-iAogNrrggJ7U4mwByzBAab_mALRFXHDR55ywj6eVw7wRCXndTsOWozLMNPuaee-DqFGyVgfVrr9Q5duSW05qxTYl5606m1_yvYe0x7k0ecY7_mTMfTz_x_vnL1clx5rW7xTZwBhQ");
+}
+
+@utility zen-pattern {
+  background-image: radial-gradient(circle at 2px 2px, #e5e7eb 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+@utility wood-divider {
+  height: 8px;
+  background: linear-gradient(to right, var(--color-wood), #634a35, var(--color-wood));
+  border-radius: 4px;
+}
+
+/* --- Reveal System (Intersection Observer Classes) --- */
+
+@layer components {
+  .reveal-fade, 
+  .reveal-left, 
+  .reveal-right, 
+  .reveal-scale {
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), 
+                transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+  }
+
+  .reveal-fade { transform: translateY(30px); }
+  .reveal-left { transform: translateX(-40px); }
+  .reveal-right { transform: translateX(40px); }
+  .reveal-scale { transform: scale(0.92); }
+
+  .reveal-visible {
+    opacity: 1 !important;
+    transform: translate(0, 0) scale(1) !important;
+  }
+
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.2s; }
+  .stagger-3 { transition-delay: 0.3s; }
+}
+
+/* --- Base Styles --- */
+
+@layer base {
+  body {
+    @apply bg-parchment text-sumi font-sans selection:bg-brand selection:text-sumi overflow-x-hidden;
+  }
+  
+  img {
+    @apply max-w-full h-auto object-cover;
+  }
 }
