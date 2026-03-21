@@ -1,47 +1,66 @@
+import Image from 'next/image';
+
 export default function Hero() {
   return (
     <section 
-      className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 overflow-hidden" 
+      className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden bg-background" 
       data-purpose="hero"
     >
-      {/* Background Layer */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          alt="Japanese Dojo Interior" 
-          className="w-full h-full object-cover opacity-20" 
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbCA343iGYzH2VNiiq6CYfb9erkMFbeeAgiwPnmhOH1R-nB1MofFZUC1NAUqnxGafWARW0GfDgBsQSbo5g4zZm05E8u1M4MDKz-MJT70Ot07koFhpPLxcHA1gzdUAd0w0XdeGsSts20HbK5rRxxkBBNJRAo5bPqTJHt7eCrUH8PH3YStkZF0o8CnDemY0UXKj3lzzB1KeEwGIPWzEkpvJHVkgGRYayVuPpOJcSDG71TU4nw7AVfx-AMSChUkf2AQhisrs7KXc0hhM" 
-          loading="lazy" 
+      {/* Background Layer with Slow Zoom */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <Image 
+          alt="Dojo Interior" 
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZfnHwL11NmP98xuJRz7XqAyna4nOmuc2cMaI0dGA35dndC4LpoRj9Qu9yq9YF4C0ZGMaxAGdVOnB5VvJUazXeNoIxDnddHAsYj2MJth8nUnhlsEcgMZlxW3TXBw37loAnAJ3GnVO9QxMhR9KdVY_0axKwHk1MFfHJ9oxsn-3Yx8M3AnUcI-RpWYuJaMdST6pUAKjzYUzwCVS7MLBhQcSgT6p06zvR0FWluXvBeqNsiIlIZOq-XnJdgM9u2MgBtr_xlZm-s8qoLkc" 
+          fill
+          priority
+          className="object-cover opacity-40 animate-slow-zoom"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-parchment/0 via-parchment/50 to-parchment"></div>
+        {/* Gradient Overlay using v4 tokens */}
+        <div className="absolute inset-0 bg-linear-to-t from-background via-background/60 to-transparent"></div>
       </div>
 
-      {/* Main Content - Uses the v4 custom animation */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto animate-soft-fade-up">
-        <span className="inline-block px-3 sm:px-4 py-1 mb-4 sm:mb-6 border border-brand/50 text-brand font-semibold rounded-full text-[0.7rem] sm:text-xs tracking-widest uppercase">
-          A motion-u initiative
-        </span>
-        
-        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-4 sm:mb-6 text-sumi leading-tight">
-          Master the Art of <span className="text-brand whitespace-nowrap">Code</span>
-        </h1>
-        
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-8 sm:mb-10 font-light leading-relaxed max-w-3xl mx-auto px-2">
-          A sanctuary for developers to refine their craft through discipline, mentorship, and the pursuit of digital perfection.
-        </p>
+      <div className="relative z-10 max-w-7xl mx-auto px-8 w-full">
+        <div className="grid md:grid-cols-12 gap-12 items-end">
+          
+          {/* Left Content - Typography */}
+          <div className="md:col-span-8 space-y-8 animate-fade-up">
+            <span className="inline-block text-tertiary font-sans text-sm tracking-[0.3em] uppercase border-l-2 border-tertiary pl-4">
+              A Motion-U Initiative
+            </span>
+            
+            <h1 className="text-6xl md:text-8xl font-headline font-bold leading-tight tracking-tight text-on-surface">
+              Master the <br/> 
+              <span className="text-primary italic animate-glow-pulse">Art of Code</span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-on-surface-variant font-light max-w-2xl leading-relaxed">
+              A sanctuary for those who seek technical mastery through discipline, focus, and the guidance of the masters.
+            </p>
+          </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4">
-          <button className="w-full sm:w-auto px-6 sm:px-10 py-3 sm:py-4 bg-brand text-sumi font-bold rounded-eight hover:shadow-lg hover:shadow-brand/20 transition-all transform hover:-translate-y-1 text-sm sm:text-base cursor-pointer">
-            Join the Dojo
-          </button>
-          <button className="w-full sm:w-auto px-6 sm:px-10 py-3 sm:py-4 border border-wood/30 text-wood font-medium rounded-eight hover:bg-wood/5 transition-all text-sm sm:text-base cursor-pointer">
-            Explore the Path
-          </button>
+          {/* Right Content - The "Intake" Card */}
+          <div className="md:col-span-4 flex justify-end animate-fade-up [animation-delay:0.2s]">
+            <div className="border border-outline-variant/30 p-8 backdrop-blur-md bg-surface/60 hover:bg-surface/80 transition-all duration-500 hover:border-primary/40 max-w-xs group shadow-2xl">
+              <h3 className="font-headline text-lg mb-4 text-primary">The Seasonal Intake</h3>
+              <p className="text-sm text-outline mb-6 leading-relaxed">
+                The Autumn cohort begins when the first leaf falls. Limited mats available.
+              </p>
+              <button className="w-full border border-outline py-3 text-primary font-sans text-xs tracking-widest hover:bg-primary/20 transition-all duration-300 uppercase hover:tracking-[0.3em] cursor-pointer">
+                Secure Your Place
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      {/* Animated Scroll Indicator - Uses the v4 custom bounce animation */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-scroll-bounce hidden sm:block">
-        <div className="w-px h-16 bg-linear-to-b from-brand to-transparent"></div>
+      {/* Floating Decorative Elements (The "Dojo Brackets") */}
+      <div className="absolute bottom-12 left-12 w-20 h-20 border-t border-l border-primary/30 opacity-50 hidden lg:block"></div>
+      <div className="absolute top-1/3 right-8 w-12 h-12 border-r border-b border-tertiary/30 hidden lg:block"></div>
+      
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden sm:block opacity-30">
+        <div className="w-px h-24 bg-linear-to-b from-primary to-transparent"></div>
       </div>
     </section>
   );

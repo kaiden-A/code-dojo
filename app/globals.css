@@ -2,106 +2,77 @@
 
 @theme {
   /* Brand Colors */
-  --color-brand: #6cee2b;
-  --color-parchment: #fcfaf2;
-  --color-sumi: #1a1a1a;
-  --color-wood: #4a3728;
+  --color-primary: #eabf8d;
+  --color-on-primary: #442b06;
+  --color-primary-container: #50350f;
+  --color-on-primary-container: #c59d6e;
+  
+  --color-secondary: #d6c2c1;
+  --color-on-secondary: #3a2d2d;
+  
+  --color-tertiary: #d8c770;
+  --color-on-tertiary: #383000;
+  
+  --color-background: #131313;
+  --color-surface: #131313;
+  --color-on-surface: #e5e2e1;
+  --color-on-surface-variant: #d2c4ba;
+  --color-outline: #9b8f85;
+  --color-outline-variant: #4e453d;
+  --color-surface-container-low: #1c1b1b;
+  --color-surface-container-lowest: #0e0e0e;
 
   /* Typography */
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Noto Serif JP", serif;
+  --font-headline: "Noto Serif", serif;
+  --font-body: "Manrope", sans-serif;
 
-  /* Border Radii */
-  --radius-eight: 8px;
+/* CORRECT KEYFRAME SYNTAX IN V4 */
+  @keyframes fade-up {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
 
-  /* Custom Breakpoints (Optional) */
-  --breakpoint-xs: 380px;
+  @keyframes slow-zoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.08); }
+  }
 
-  /* Animations & Keyframes */
-  @keyframes soft-fade-up {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes glow-pulse {
+    0% { text-shadow: 0 0 0px #eabf8d; }
+    100% { text-shadow: 0 0 8px #eabf8d; }
   }
-  @keyframes soft-scale {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  @keyframes float-zen {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-8px); }
-  }
+
+  /* Assigning them to animation utilities */
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+  --animate-slow-zoom: slow-zoom 18s ease-out forwards;
+  --animate-glow-pulse: glow-pulse 2s infinite alternate;
+}
+
+/* Custom Utilities for the Dojo Aesthetic */
+@utility shoji-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(78, 69, 61, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(78, 69, 61, 0.15) 1px, transparent 1px);
+  background-size: 40px 60px;
+}
+
+@utility tatami-texture {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(234, 191, 141, 0.03) 0px,
+    rgba(234, 191, 141, 0.03) 2px,
+    transparent 2px,
+    transparent 12px
+  );
+}
+
+@utility reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
   
-  --animate-soft-fade-up: soft-fade-up 1.2s ease-out forwards;
-  --animate-float: float-zen 6s ease-in-out infinite;
-  --animate-scroll-bounce: float-zen 3s ease-in-out infinite;
-
-
-  @keyframes slide-left-door {
-      from { transform: translateX(0); }
-      to { transform: translateX(-100%); }
-    }
-    @keyframes slide-right-door {
-      from { transform: translateX(0); }
-      to { transform: translateX(100%); }
-    }
-  
-  /* Slower, more cinematic timing (2.2s) with a 0.3s delay */
-  --animate-shoji-left: slide-left-door 2.2s cubic-bezier(0.7, 0, 0.3, 1) 0.3s forwards;
-  --animate-shoji-right: slide-right-door 2.2s cubic-bezier(0.7, 0, 0.3, 1) 0.3s forwards;
-}
-
-/* --- Custom Utilities --- */
-
-@utility paper-texture {
-  background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAcUiqRkF7iHJW_JgUpIWXvzexjP7QbbMo8LBaL9VLSOJKFt5j4lVTmoZMTbjQQktK5nRoDTbfeuKt6DwFvobHDbDRWkJjTx1cs1D411Wfq1mh24CG3eZREYU9SEy75CV6FtU-iAogNrrggJ7U4mwByzBAab_mALRFXHDR55ywj6eVw7wRCXndTsOWozLMNPuaee-DqFGyVgfVrr9Q5duSW05qxTYl5606m1_yvYe0x7k0ecY7_mTMfTz_x_vnL1clx5rW7xTZwBhQ");
-}
-
-@utility zen-pattern {
-  background-image: radial-gradient(circle at 2px 2px, #e5e7eb 1px, transparent 0);
-  background-size: 24px 24px;
-}
-
-@utility wood-divider {
-  height: 8px;
-  background: linear-gradient(to right, var(--color-wood), #634a35, var(--color-wood));
-  border-radius: 4px;
-}
-
-/* --- Reveal System (Intersection Observer Classes) --- */
-
-@layer components {
-  .reveal-fade, 
-  .reveal-left, 
-  .reveal-right, 
-  .reveal-scale {
-    opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), 
-                transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-  }
-
-  .reveal-fade { transform: translateY(30px); }
-  .reveal-left { transform: translateX(-40px); }
-  .reveal-right { transform: translateX(40px); }
-  .reveal-scale { transform: scale(0.92); }
-
-  .reveal-visible {
-    opacity: 1 !important;
-    transform: translate(0, 0) scale(1) !important;
-  }
-
-  .stagger-1 { transition-delay: 0.1s; }
-  .stagger-2 { transition-delay: 0.2s; }
-  .stagger-3 { transition-delay: 0.3s; }
-}
-
-/* --- Base Styles --- */
-
-@layer base {
-  body {
-    @apply bg-parchment text-sumi font-sans selection:bg-brand selection:text-sumi overflow-x-hidden;
-  }
-  
-  img {
-    @apply max-w-full h-auto object-cover;
+  &.revealed {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

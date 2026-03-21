@@ -1,92 +1,104 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function About() {
+  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Find all children with reveal classes and make them visible
-            const reveals = entry.target.querySelectorAll(
-              '.reveal-left, .reveal-right, .reveal-fade'
-            );
-            reveals.forEach((el) => el.classList.add('reveal-visible'));
-            observer.unobserve(entry.target);
-          }
-        });
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
+
+  const revealClass = (delay: string) => 
+    `transition-all duration-1000 transform ${delay} ${
+      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+    }`;
 
   return (
     <section 
       ref={sectionRef}
-      className="py-16 sm:py-24 px-4 sm:px-6 paper-texture overflow-hidden" 
+      className="py-32 bg-surface-container-low relative overflow-hidden" 
       id="about"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
-          
-          {/* Content Column */}
-          <div className="order-2 md:order-1 reveal-left">
-            <div className="wood-divider mb-6 sm:mb-8 w-20 sm:w-24"></div>
-            
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-8">
+      {/* Background Texture from globals.css */}
+      <div className="absolute inset-0 tatami-texture opacity-40"></div>
+
+      <div className="max-w-7xl mx-auto px-8 relative z-10">
+        
+        {/* Header Section */}
+        <div className={`flex flex-col md:flex-row justify-between items-start mb-24 gap-8 ${revealClass('delay-0')}`}>
+          <div className="max-w-xl group">
+            <h2 className="text-4xl md:text-5xl font-headline text-on-surface mb-6 italic">
               The Way of the Craftsman
             </h2>
-            
-            <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-700 leading-relaxed">
-              <p>
-                codeDojo is not a bootcamp. It is a lifelong initiative by{" "}
-                <span className="font-semibold text-sumi">motion-u</span> designed to transform developers into software artisans. We believe that code is more than logic—it is an expression of discipline.
-              </p>
-              <p>
-                Our philosophy is rooted in the <span className="italic">"Shuhari"</span> stages of learning: first following the rules (Shu), then breaking them (Ha), and finally transcending them (Ri) to find one's own unique path in software architecture.
-              </p>
-            </div>
+            <div className="h-1 w-24 bg-primary mb-8 transition-all duration-700 group-hover:w-32"></div>
+          </div>
+          <p className="text-on-surface-variant font-light max-w-md leading-relaxed">
+            We follow the ancient concept of Shuhari: the three stages of mastery. 
+            From humble student to innovative master.
+          </p>
+        </div>
 
-            {/* Stats/Pillars Grid */}
-            <div className="mt-8 sm:mt-10 grid grid-cols-2 gap-4 sm:gap-8 border-t border-wood/10 pt-6 sm:pt-10">
-              <div>
-                <span className="block text-2xl sm:text-3xl font-serif text-brand">01.</span>
-                <span className="font-bold text-sumi text-sm sm:text-base uppercase tracking-tight">Discipline</span>
-                <p className="text-xs sm:text-sm text-gray-500 mt-1 sm:mt-2">Consistent practice and rigorous standards.</p>
-              </div>
-              <div>
-                <span className="block text-2xl sm:text-3xl font-serif text-brand">02.</span>
-                <span className="font-bold text-sumi text-sm sm:text-base uppercase tracking-tight">Mentorship</span>
-                <p className="text-xs sm:text-sm text-gray-500 mt-1 sm:mt-2">Direct guidance from industry masters.</p>
-              </div>
+        {/* Shuhari Grid */}
+        <div className="grid md:grid-cols-3 gap-0 border border-outline-variant/20">
+          
+          {/* Shu - Foundation */}
+          <div className={`group p-12 border-b md:border-b-0 md:border-r border-outline-variant/20 hover:bg-surface/70 transition-all duration-500 hover:shadow-2xl ${revealClass('delay-150')}`}>
+            <span className="text-5xl font-headline text-primary/20 group-hover:text-primary transition-all duration-300 block mb-12 group-hover:scale-110">
+              01
+            </span>
+            <h3 className="text-2xl font-headline text-primary mb-6 group-hover:tracking-wide transition-all">
+              SHU (守)
+            </h3>
+            <p className="text-on-surface-variant leading-relaxed mb-8 group-hover:text-on-surface transition">
+              Follow the rules. In this stage, the student repeats the kata precisely as taught by the sensei. Mastery of fundamental syntax and architecture.
+            </p>
+            <div className="text-[10px] tracking-[0.4em] uppercase text-outline font-bold group-hover:text-primary transition">
+              Foundation Period
             </div>
           </div>
 
-          {/* Visual Column */}
-          <div className="order-1 md:order-2 relative reveal-right">
-            <div className="aspect-square bg-white rounded-eight shadow-2xl overflow-hidden p-3 sm:p-4 rotate-2 md:rotate-3 transform hover:rotate-0 transition-transform duration-500">
-              <img 
-                alt="Bonsai Tree representing growth" 
-                className="w-full h-full object-cover rounded-eight" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0FTbUlatlp5twpyyTbxCLMnb-6kPc_Ra43Fzck2nExni0U2U0MQtPgH_vGiGRj-6NWuEBOjPpX9np70ctP6zpBwhVz9k4Q3Ab-FhW_TCTqJ62pO_0q5h-AgHQZTN4oAiqDwP7bo4QQ4Dbx82KMFjzgUp6selo4-Elt3dwnk0mx5sN7wxxjGgKikq4w2ABJm9wvlREmNfMbaehXOqNvPxhdolnec657TwfkyG6VqVNlMa8UaKSrV8RYkyQcVe02gOgo7pMGn0jJg4" 
-                loading="lazy" 
-              />
+          {/* Ha - Innovation */}
+          <div className={`group p-12 border-b md:border-b-0 md:border-r border-outline-variant/20 hover:bg-surface/70 transition-all duration-500 bg-surface-container-low/50 ${revealClass('delay-300')}`}>
+            <span className="text-5xl font-headline text-primary/20 group-hover:text-primary transition-all duration-300 block mb-12 group-hover:scale-110">
+              02
+            </span>
+            <h3 className="text-2xl font-headline text-primary mb-6 group-hover:tracking-wide transition-all">
+              HA (破)
+            </h3>
+            <p className="text-on-surface-variant leading-relaxed mb-8 group-hover:text-on-surface transition">
+              Break the rules. Having mastered the basics, the student experiments and explores the &quot;why&quot; behind the logic. Refactoring and optimization.
+            </p>
+            <div className="text-[10px] tracking-[0.4em] uppercase text-outline font-bold group-hover:text-primary transition">
+              Innovation Period
             </div>
-            
-            {/* Floating Zen Stone */}
-            <div className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-brand/10 backdrop-blur-xl rounded-full flex items-center justify-center border border-brand/20 animate-float">
-              <span className="text-[0.6rem] sm:text-xs tracking-widest font-bold text-center leading-tight">
-                HARMONY<br />IN LOGIC
-              </span>
+          </div>
+
+          {/* Ri - Mastery */}
+          <div className={`group p-12 hover:bg-surface/70 transition-all duration-500 ${revealClass('delay-450')}`}>
+            <span className="text-5xl font-headline text-primary/20 group-hover:text-primary transition-all duration-300 block mb-12 group-hover:scale-110">
+              03
+            </span>
+            <h3 className="text-2xl font-headline text-primary mb-6 group-hover:tracking-wide transition-all">
+              RI (離)
+            </h3>
+            <p className="text-on-surface-variant leading-relaxed mb-8 group-hover:text-on-surface transition">
+              Be the rule. The student transcends formal instruction. Intuitive development where code flows naturally as an extension of thought.
+            </p>
+            <div className="text-[10px] tracking-[0.4em] uppercase text-outline font-bold group-hover:text-primary transition">
+              Mastery Period
             </div>
           </div>
 

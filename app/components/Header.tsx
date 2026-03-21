@@ -1,35 +1,83 @@
+"use client";
 
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function Header(){
+export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
 
-    return(
-        <nav className="fixed top-0 w-full z-50 bg-parchment/80 backdrop-blur-md border-b border-wood/10" data-purpose="main-nav">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-            
-                <div className="flex items-center space-x-3 shrink-0">
-                    
-                    {/* The New Image/Logo */}
-                    <img 
-                        src="/icon.png" 
-                        alt="Dojo Icon" 
-                        className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
-                    />
+  // Handle navbar background transition on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-                    {/* The Brand Text */}
-                    <span className="font-serif text-xl sm:text-2xl font-bold tracking-tighter">
-                        codeDojo
-                    </span>
-                    </div>
-            <div className="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-widest">
-                <a className="hover:text-brand transition-colors" href="#about">Philosophy</a>
-                <a className="hover:text-brand transition-colors" href="#features">Pathways</a>
-                <a className="hover:text-brand transition-colors" href="#community">Sangha</a>
-                </div>
-                
-                <a className="px-4 sm:px-6 py-1.5 sm:py-2 border-2 border-sumi rounded-eight font-semibold hover:bg-sumi hover:text-white transition-all duration-300 text-sm sm:text-base whitespace-nowrap" href="#">
-                <span className="hidden xs:inline">Enter Dojo</span><span className="xs:hidden">Dojo</span>
-                </a>
-            </div>
-        </nav>
-    )
+  return (
+    <nav
+      className={`fixed top-0 w-full z-50 flex justify-between items-center px-8 py-5 transition-all duration-300 border-b ${
+        isScrolled 
+          ? "bg-background/80 backdrop-blur-xl border-outline-variant/20 py-4" 
+          : "bg-transparent border-transparent"
+      }`}
+    >
+      {/* Brand Logo & Name */}
+      <Link href="/" className="flex items-center gap-3 group">
+        <div className="relative w-8 h-8 transition-transform duration-500 group-hover:rotate-12">
+          <Image 
+            src="/icon.png" 
+            alt="Dojo Icon" 
+            fill 
+            className="object-contain"
+          />
+        </div>
+        <span className="text-2xl font-serif tracking-tighter text-primary animate-pulse [animation-duration:3s]">
+          codeDojo
+        </span>
+      </Link>
+
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex items-center gap-12">
+        <Link 
+          href="#curriculum" 
+          className="text-primary border-b-2 border-primary pb-1 font-bold font-sans tracking-wider uppercase text-xs transition-all duration-300 hover:tracking-widest"
+        >
+          Curriculum
+        </Link>
+        <Link 
+          href="#sensei" 
+          className="text-outline hover:text-primary transition-all duration-300 font-sans tracking-wider uppercase text-xs hover:tracking-wider"
+        >
+          Sensei
+        </Link>
+        <Link 
+          href="#locations" 
+          className="text-outline hover:text-primary transition-all duration-300 font-sans tracking-wider uppercase text-xs hover:tracking-wider"
+        >
+          Dojo Locations
+        </Link>
+        <Link 
+          href="#membership" 
+          className="text-outline hover:text-primary transition-all duration-300 font-sans tracking-wider uppercase text-xs hover:tracking-wider"
+        >
+          Membership
+        </Link>
+      </div>
+
+      {/* Actions */}
+      <div className="flex items-center gap-6">
+        <button className="bg-primary text-on-primary px-6 py-2 font-sans text-xs uppercase tracking-widest hover:bg-primary/80 transition-all active:scale-95 duration-200 shadow-lg hover:shadow-primary/20 cursor-pointer">
+          Join the Hall
+        </button>
+        
+        {/* Mobile Menu Icon (Requires Material Symbols font in layout) */}
+        <button className="md:hidden text-primary transition-transform hover:scale-110">
+          <span className="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </nav>
+  );
 }

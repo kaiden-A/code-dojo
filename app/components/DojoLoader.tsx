@@ -11,12 +11,12 @@ export default function DojoLoader({ children }: DojoLoaderProps) {
   const [isMounted, setIsMounted] = useState(true);
 
   useEffect(() => {
-    // Start the parting sequence shortly after mount
+    // Parting sequence begins shortly after mount
     const startAnimation = setTimeout(() => {
       setShouldOpen(true);
-    }, 200);
+    }, 400);
 
-    // Increase this to 3000ms so the doors have time to finish their 2.2s slide
+    // Unmount after doors complete their slide (approx 3s)
     const unmountTimer = setTimeout(() => {
       setIsMounted(false);
     }, 3000);
@@ -29,42 +29,54 @@ export default function DojoLoader({ children }: DojoLoaderProps) {
 
   return (
     <div className="relative min-h-screen">
-      {/* The Inside (Your Content) */}
+      {/* Content Layer */}
       <div className={isMounted ? 'h-screen overflow-hidden' : ''}>
         {children}
       </div>
 
-      {/* The Doors Overlay */}
+      {/* The Black Lacquer & Gold Doors */}
       {isMounted && (
-        <div className="fixed inset-0 z-9999 flex overflow-hidden pointer-events-none">
+        <div className="fixed inset-0 z-[9999] flex overflow-hidden pointer-events-none">
           
-          {/* Left Door */}
+          {/* Left Door: Black Lacquer with Gold Edge */}
           <div 
-            className={`relative h-full w-1/2 bg-parchment border-r border-wood/30 shadow-[10px_0_30px_rgba(0,0,0,0.1)] flex items-center justify-end
-              ${shouldOpen ? 'animate-shoji-left' : 'translate-x-0'}`}
+            className={`relative h-full w-1/2 bg-[#0a0a0a] border-r-2 border-primary/40 shadow-[20px_0_50px_rgba(0,0,0,0.5)] flex items-center justify-end transition-transform duration-[2200ms] ease-in-out
+              ${shouldOpen ? '-translate-x-full' : 'translate-x-0'}`}
           >
-            <div className="absolute inset-0 opacity-10 zen-pattern"></div>
-            {/* Visual handle */}
-            <div className="w-1.5 h-32 bg-wood/20 rounded-full mr-4 border-r border-white/10"></div>
+            {/* Subtle Tatami/Zen Pattern Overlay */}
+            <div className="absolute inset-0 opacity-10 tatami-texture"></div>
+            
+            {/* Gold Vertical Handle */}
+            <div className="relative mr-6 group">
+               <div className="w-1.5 h-48 bg-primary rounded-full shadow-[0_0_15px_rgba(234,191,141,0.4)] transition-all duration-1000"></div>
+               <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 border-t-2 border-r-2 border-primary/50 rotate-45"></div>
+            </div>
           </div>
 
-          {/* Right Door */}
+          {/* Right Door: Black Lacquer with Gold Edge */}
           <div 
-            className={`relative h-full w-1/2 bg-parchment border-l border-wood/30 shadow-[-10px_0_30px_rgba(0,0,0,0.1)] flex items-center justify-start
-              ${shouldOpen ? 'animate-shoji-right' : 'translate-x-0'}`}
+            className={`relative h-full w-1/2 bg-[#0a0a0a] border-l-2 border-primary/40 shadow-[-20px_0_50px_rgba(0,0,0,0.5)] flex items-center justify-start transition-transform duration-[2200ms] ease-in-out
+              ${shouldOpen ? 'translate-x-full' : 'translate-x-0'}`}
           >
-            <div className="absolute inset-0 opacity-10 zen-pattern"></div>
-            {/* Visual handle */}
-            <div className="w-1.5 h-32 bg-wood/20 rounded-full ml-4 border-l border-white/10"></div>
+            <div className="absolute inset-0 opacity-10 tatami-texture"></div>
+            
+            {/* Gold Vertical Handle */}
+            <div className="relative ml-6 group">
+               <div className="w-1.5 h-48 bg-primary rounded-full shadow-[0_0_15px_rgba(234,191,141,0.4)] transition-all duration-1000"></div>
+               <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 border-b-2 border-l-2 border-primary/50 rotate-45"></div>
+            </div>
           </div>
 
-          {/* Center Brand Symbol - Fades first to signal the opening */}
-          <div className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 ease-in-out
-            ${shouldOpen ? 'opacity-0 scale-150 blur-xl' : 'opacity-100 scale-100'}`}>
+          {/* Central Brand Symbol (Fades Out) */}
+          <div className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 ease-in-out z-10
+            ${shouldOpen ? 'opacity-0 scale-150 blur-2xl' : 'opacity-100 scale-100'}`}>
             <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-brand rounded-eight rotate-45 animate-pulse shadow-[0_0_40px_rgba(108,238,43,0.4)]"></div>
-              <span className="mt-10 font-serif text-sumi tracking-[0.6em] uppercase text-xs font-bold">
-                Entering
+              {/* Spinning Dojo Diamond */}
+              <div className="w-16 h-16 border-2 border-primary rotate-45 flex items-center justify-center animate-[spin_10s_linear_infinite]">
+                 <div className="w-8 h-8 bg-primary shadow-[0_0_30px_rgba(234,191,141,0.6)]"></div>
+              </div>
+              <span className="mt-12 font-serif text-primary tracking-[0.8em] uppercase text-[10px] font-bold animate-pulse">
+                Entering the Sanctum
               </span>
             </div>
           </div>

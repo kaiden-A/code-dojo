@@ -9,14 +9,14 @@ import DojoLoader from "./components/DojoLoader";
 export default function Home() {
   return (
     <DojoLoader>
-      <main className="bg-parchment">
+      <main>
         <Header/>
         <Hero/>
         <About/>
         <Features/>
         <Footer/>
       </main>
-
     </DojoLoader>
+
   );
 }
