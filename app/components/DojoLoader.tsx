@@ -36,11 +36,11 @@ export default function DojoLoader({ children }: DojoLoaderProps) {
 
       {/* The Black Lacquer & Gold Doors */}
       {isMounted && (
-        <div className="fixed inset-0 z-[9999] flex overflow-hidden pointer-events-none">
+        <div className="fixed inset-0 z-9999 flex overflow-hidden pointer-events-none">
           
           {/* Left Door: Black Lacquer with Gold Edge */}
           <div 
-            className={`relative h-full w-1/2 bg-[#0a0a0a] border-r-2 border-primary/40 shadow-[20px_0_50px_rgba(0,0,0,0.5)] flex items-center justify-end transition-transform duration-[2200ms] ease-in-out
+            className={`relative h-full w-1/2 bg-[#0a0a0a] border-r-2 border-primary/40 shadow-[20px_0_50px_rgba(0,0,0,0.5)] flex items-center justify-end transition-transform duration-2200 ease-in-out
               ${shouldOpen ? '-translate-x-full' : 'translate-x-0'}`}
           >
             {/* Subtle Tatami/Zen Pattern Overlay */}
@@ -55,7 +55,7 @@ export default function DojoLoader({ children }: DojoLoaderProps) {
 
           {/* Right Door: Black Lacquer with Gold Edge */}
           <div 
-            className={`relative h-full w-1/2 bg-[#0a0a0a] border-l-2 border-primary/40 shadow-[-20px_0_50px_rgba(0,0,0,0.5)] flex items-center justify-start transition-transform duration-[2200ms] ease-in-out
+            className={`relative h-full w-1/2 bg-[#0a0a0a] border-l-2 border-primary/40 shadow-[-20px_0_50px_rgba(0,0,0,0.5)] flex items-center justify-start transition-transform duration-2200 ease-in-out
               ${shouldOpen ? 'translate-x-full' : 'translate-x-0'}`}
           >
             <div className="absolute inset-0 opacity-10 tatami-texture"></div>
