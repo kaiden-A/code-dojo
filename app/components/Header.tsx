@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const NAV_LINKS = [
-  { name: "Curriculum", href: "#curriculum" },
+  { name: "Curriculum", href: "/curriculum" },
   { name: "Sensei", href: "#sensei" },
   { name: "Dojo Locations", href: "#locations" },
   { name: "Membership", href: "#membership" },

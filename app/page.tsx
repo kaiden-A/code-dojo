@@ -10,11 +10,11 @@ export default function Home() {
   return (
     <DojoLoader>
       <main>
-        <Header/>
+
         <Hero/>
         <About/>
         <Features/>
-        <Footer/>
+
       </main>
     </DojoLoader>
 
