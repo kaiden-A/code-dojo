@@ -1,18 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand Colors */
   --color-primary: #eabf8d;
   --color-on-primary: #442b06;
   --color-primary-container: #50350f;
   --color-on-primary-container: #c59d6e;
-  
   --color-secondary: #d6c2c1;
   --color-on-secondary: #3a2d2d;
-  
   --color-tertiary: #d8c770;
   --color-on-tertiary: #383000;
-  
   --color-background: #131313;
   --color-surface: #131313;
   --color-on-surface: #e5e2e1;
@@ -22,33 +18,22 @@
   --color-surface-container-low: #1c1b1b;
   --color-surface-container-lowest: #0e0e0e;
 
-  /* Typography */
   --font-headline: "Noto Serif", serif;
   --font-body: "Manrope", sans-serif;
 
-/* CORRECT KEYFRAME SYNTAX IN V4 */
   @keyframes fade-up {
     0% { opacity: 0; transform: translateY(30px); }
     100% { opacity: 1; transform: translateY(0); }
   }
-
-  @keyframes slow-zoom {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.08); }
-  }
-
   @keyframes glow-pulse {
     0% { text-shadow: 0 0 0px #eabf8d; }
     100% { text-shadow: 0 0 8px #eabf8d; }
   }
 
-  /* Assigning them to animation utilities */
   --animate-fade-up: fade-up 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
-  --animate-slow-zoom: slow-zoom 18s ease-out forwards;
   --animate-glow-pulse: glow-pulse 2s infinite alternate;
 }
 
-/* Custom Utilities for the Dojo Aesthetic */
 @utility shoji-pattern {
   background-image: 
     linear-gradient(to right, rgba(78, 69, 61, 0.15) 1px, transparent 1px),
@@ -56,23 +41,19 @@
   background-size: 40px 60px;
 }
 
-@utility tatami-texture {
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(234, 191, 141, 0.03) 0px,
-    rgba(234, 191, 141, 0.03) 2px,
-    transparent 2px,
-    transparent 12px
-  );
+/* Ensure smooth scrolling works with fixed canvas */
+html.lenis {
+  height: auto;
 }
 
-@utility reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(36px);
-  transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  
-  &.revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }

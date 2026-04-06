@@ -28,6 +28,7 @@ export default function CurriculumPage() {
         <ScrollReveal delay={100}>
           <CurriculumCard 
             id="01"
+            link="how-website-work"
             title="Behind the Scenes of a Websites"
             description="Many developers learn frontend or backend separately, but real understanding comes from seeing how everything connects."
             level="Initiate"
@@ -38,10 +39,11 @@ export default function CurriculumPage() {
         <ScrollReveal delay={200}>
           <CurriculumCard 
             id="02"
-            title="Coming Soon..."
-            description="Coming Soon..."
-            level="Craftsman"
-            status="locked"
+            link="how-to-know"
+            title="How to Know What to Know"
+            description="Sometimes I feel like i want to build everything in the world...but how?"
+            level="Initiate"
+            status="active"
           />
         </ScrollReveal>
 

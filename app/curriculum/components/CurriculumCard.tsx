@@ -4,6 +4,7 @@ import Link from "next/link";
 interface CurriculumCardProps {
   id: string;
   title: string;
+  link?:string;
   description: string;
   level: string;
   status: "completed" | "active" | "locked";
@@ -13,6 +14,7 @@ interface CurriculumCardProps {
 export default function CurriculumCard({
   id,
   title,
+  link,
   description,
   level,
   status,
@@ -81,7 +83,7 @@ export default function CurriculumCard({
               {level}
             </span>
             {isActive ? (
-              <Link href={'/curriculum/how-website-work'}>
+              <Link href={`/curriculum/${link}`}>
                 <button className="bg-primary text-on-primary px-4 py-2 text-[10px] uppercase tracking-widest font-bold hover:bg-primary/90 transition-colors">
                   Continue Path
                 </button>

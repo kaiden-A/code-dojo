@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "app/curriculum/how-to-know/page.js", "app/curriculum/how-to-know/components/DojoScene.js"  ],
   "exclude": ["node_modules"]
 }
