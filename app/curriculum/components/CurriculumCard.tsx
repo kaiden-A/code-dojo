@@ -89,9 +89,11 @@ export default function CurriculumCard({
                 </button>
               </Link>
             ) : (
-              <button className="text-primary text-xs uppercase flex items-center gap-2 hover:text-tertiary transition-colors">
-                Review Scroll <ArrowRight size={14} />
-              </button>
+              <Link href={`/curriculum/${link}`}>
+                <button className="text-primary text-xs uppercase flex items-center gap-2 hover:text-tertiary transition-colors">
+                  Review Scroll <ArrowRight size={14} />
+                </button>
+              </Link>
             )}
           </>
         )}

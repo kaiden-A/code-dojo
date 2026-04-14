@@ -32,7 +32,7 @@ export default function CurriculumPage() {
             title="Behind the Scenes of a Websites"
             description="Many developers learn frontend or backend separately, but real understanding comes from seeing how everything connects."
             level="Initiate"
-            status="active"
+            status="completed"
           />
         </ScrollReveal>
 
@@ -50,10 +50,11 @@ export default function CurriculumPage() {
         <ScrollReveal delay={300}>
           <CurriculumCard 
             id="03"
-            title="Coming Soon..."
+            title="Magic World of Code"
+            link="magic-world-of-code"
             description="Coming soon..."
             level="Adept"
-            status="locked"
+            status="active"
           />
         </ScrollReveal>
 
