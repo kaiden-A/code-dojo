@@ -58,6 +58,17 @@ export default function CurriculumPage() {
           />
         </ScrollReveal>
 
+        <ScrollReveal delay={300}>
+          <CurriculumCard 
+            id="04"
+            title="Land of Frameworks"
+            link="land-of-frameworks"
+            description="Exploring Vuejs, one of the most popular frontend frameworks, and understanding its core principles and ecosystem."
+            level="Adept"
+            status="active"
+          />
+        </ScrollReveal>
+
       </section>
     </main>
   );
