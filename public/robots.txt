@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Host
+Host: https://codedojo.motionukict.com
+
+# Sitemaps
+Sitemap: https://codedojo.motionukict.com/sitemap.xml
