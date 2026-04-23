@@ -42,7 +42,7 @@ export default function Header() {
         {/* Brand Logo & Name */}
         <Link href="/" className="flex items-center gap-3 group z-60">
           <div className="relative w-7 h-7 md:w-8 md:h-8 transition-transform duration-500 group-hover:rotate-12">
-            <Image src="/icon.png" alt="Dojo Icon" fill className="object-contain" />
+           <Image src="/icon.png" alt="Dojo Icon" fill className="object-contain" />
           </div>
           <span className="text-xl md:text-2xl font-serif tracking-tighter text-primary animate-pulse [animation-duration:3s]">
             codeDojo

@@ -7,7 +7,7 @@ export default function CurriculumPage() {
     <main className="relative min-h-screen pt-32 pb-20 px-6 md:px-12">
       <DojoBackground />
 
-      <header className="relative z-10 max-w-7xl mx-auto mb-24">
+      <div className="relative z-10 max-w-7xl mx-auto mb-24">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="max-w-2xl animate-fade-up">
             <span className="text-tertiary font-label tracking-[0.3em] uppercase text-xs mb-4 block">
@@ -21,7 +21,7 @@ export default function CurriculumPage() {
             </p>
           </div>
         </div>
-      </header>
+      </div>
 
       <section className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
         
