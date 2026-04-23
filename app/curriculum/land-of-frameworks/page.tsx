@@ -47,7 +47,6 @@ export default function LandOfFrameworksPage() {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    console.log('LandOfFrameworksPage: Initializing...');
     
     try {
       const lenis = new Lenis({
@@ -110,10 +109,10 @@ export default function LandOfFrameworksPage() {
 
       const timer = setTimeout(() => {
         ScrollTrigger.refresh();
-        console.log('LandOfFrameworksPage: ScrollTrigger refreshed');
+ 
       }, 500);
 
-      console.log('LandOfFrameworksPage: Animations set up');
+      
       
       return () => {
         clearTimeout(timer);
@@ -121,7 +120,7 @@ export default function LandOfFrameworksPage() {
         ScrollTrigger.getAll().forEach(t => t.kill());
       };
     } catch (error) {
-      console.error('LandOfFrameworksPage error:', error);
+        console.error("Error initializing Lenis or GSAP:", error);
     }
   }, []);
 

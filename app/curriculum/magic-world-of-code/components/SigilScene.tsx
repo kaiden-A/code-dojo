@@ -32,6 +32,16 @@ const SigilScene = () => {
         let mx = window.innerWidth / 2, my = window.innerHeight / 2;
         let rx = mx, ry = my;
 
+        // Set initial cursor position
+        if (cursorDotRef.current) {
+            cursorDotRef.current.style.left = `${mx}px`;
+            cursorDotRef.current.style.top = `${my}px`;
+        }
+        if (cursorRingRef.current) {
+            cursorRingRef.current.style.left = `${rx}px`;
+            cursorRingRef.current.style.top = `${ry}px`;
+        }
+
         const MAX_PARTICLES = 120;
         const particles: any[] = [];
         for (let i = 0; i < MAX_PARTICLES; i++) {
@@ -364,10 +374,10 @@ const SigilScene = () => {
             <div ref={manaBloomRef} className="mana-bloom" />
 
             <div ref={containerRef} className="fixed inset-0 z-0 pointer-events-none" />
-            <canvas ref={canvasRef} className="fixed inset-0 z-9990 pointer-events-none" />
+            <canvas ref={canvasRef} className="fixed inset-0 z-[9990] pointer-events-none" />
 
-            <div ref={cursorDotRef} className="fixed w-2 h-2 rounded-full bg-[#eabf8d] pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 shadow-[0_0_10px_#eabf8d,0_0_22px_rgba(234,191,141,0.45)]" />
-            <div ref={cursorRingRef} className="fixed w-7.5 h-7.5 rounded-full border border-[rgba(234,191,141,0.45)] pointer-events-none z-[9998] -translate-x-1/2 -translate-y-1/2" />
+            <div ref={cursorDotRef} className="fixed w-2 h-2 rounded-full bg-[#eabf8d] pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 shadow-[0_0_10px_#eabf8d,0_0_22px_rgba(234,191,141,0.45)] will-change-transform" />
+            <div ref={cursorRingRef} className="fixed w-7.5 h-7.5 rounded-full border border-[rgba(234,191,141,0.45)] pointer-events-none z-[9998] -translate-x-1/2 -translate-y-1/2 will-change-transform" />
 
             {/* Corners */}
             <span className="fixed top-6 left-6 font-serif text-[0.58rem] tracking-[0.22em] text-[#eabf8d] opacity-[0.18] z-10">§ I.I</span>
