@@ -69,6 +69,17 @@ export default function CurriculumPage() {
           />
         </ScrollReveal>
 
+        <ScrollReveal delay={400}>
+          <CurriculumCard 
+            id="05"
+            title="The Architecture of Requests"
+            link="backend-and-rest"
+            description="Every click hides a conversation. Learn how servers breathe, how REST APIs speak, and how to build the invisible half of every application."
+            level="Adept"
+            status="active"
+          />
+        </ScrollReveal>
+
       </section>
     </main>
   );
