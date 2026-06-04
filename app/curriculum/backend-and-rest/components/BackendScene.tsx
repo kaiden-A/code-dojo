@@ -78,7 +78,6 @@ const BackendScene = () => {
         <div className="bg-ink text-ash selection:bg-primary/30 selection:text-primary cursor-none overflow-x-hidden">
             <style jsx global>{`
                 :root { --node: #eabf8d; --primary: #eabf8d; }
-                body { cursor: none; background: #0d0b09; }
                 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.9s ease, transform 0.9s ease; }
                 .reveal.visible { opacity: 1; transform: translateY(0); }
                 .status-box { border: 1px solid rgba(234,191,141,0.35); background: rgba(234,191,141,0.03); transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1); }

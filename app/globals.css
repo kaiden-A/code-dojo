@@ -68,7 +68,6 @@ body {
   color: var(--color-on-surface);
   font-family: var(--font-body);
   overflow-x: hidden;
-  cursor: none;
 }
 
 /* Lenis compatibility (future-safe) */

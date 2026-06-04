@@ -80,6 +80,17 @@ export default function CurriculumPage() {
           />
         </ScrollReveal>
 
+        <ScrollReveal delay={500}>
+          <CurriculumCard 
+            id="06"
+            title="Vue.js to Production"
+            link="deployment"
+            description="From localhost to live. Deploy your Vue.js frontend on Vercel with your Express backend on Render, wire them with CORS, and master environment variables."
+            level="Adept"
+            status="active"
+          />
+        </ScrollReveal>
+
       </section>
     </main>
   );
