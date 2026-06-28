@@ -4,13 +4,16 @@ module.exports = {
   generateRobotsTxt: true,
   generateIndexSitemap: false,
 
-  // Pages to exclude (add any private/auth routes here)
+  // Pages to exclude (static assets + private routes)
   exclude: [
     "/api/*",
     "/admin/*",
     "/_next/*",
     "/404",
     "/500",
+    "/icon.png",
+    "/*.svg",
+    "/*.ico",
   ],
 
   robotsTxtOptions: {
@@ -43,12 +46,12 @@ module.exports = {
       };
     }
 
-    // Main sections get high priority
-    if (["/problems", "/courses", "/mentorship"].includes(path)) {
+    // Curriculum section pages get high priority
+    if (path.startsWith("/curriculum")) {
       return {
         loc: path,
         changefreq: "weekly",
-        priority: 0.9,
+        priority: 0.8,
         lastmod: new Date().toISOString(),
       };
     }

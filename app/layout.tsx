@@ -99,13 +99,13 @@ export const metadata: Metadata = {
     title: "codeDojo | Motion-U",
     description:
       "Master data structures, system design & clean code through the Shuhari philosophy.",
-    site: "@motionukict",     // ← replace with your handle
-    creator: "@motionukict",  // ← replace with your handle
+    site: "@codeDojoMotion",
+    creator: "@motionukict",
     images: [OG_IMAGE],
   },
 
   verification: {
-    google: "REPLACE_WITH_YOUR_GOOGLE_VERIFICATION_TOKEN",
+    google: "YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE",
   },
 
   referrer: "origin-when-cross-origin",
@@ -122,15 +122,14 @@ const jsonLd = {
       "@id": `${BASE_URL}/#organization`,
       name: "codeDojo by Motion-U",
       url: BASE_URL,
-      logo: { "@type": "ImageObject", url: `${BASE_URL}/logo.png` },
+      logo: { "@type": "ImageObject", url: `${BASE_URL}/icon.png` },
       parentOrganization: {
         "@type": "Organization",
         name: "Motion-U",
         url: "https://motionukict.com",
       },
       sameAs: [
-        // "https://twitter.com/motionukict",
-        // "https://github.com/motionukict",
+        "https://github.com/motionukict",
       ],
     },
     {

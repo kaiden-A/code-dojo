@@ -1,11 +1,31 @@
 import ScrollReveal from "./components/ScrollReveal";
 import DojoBackground from "./components/DojoBackground";
 import CurriculumCard from "./components/CurriculumCard";
+import BreadcrumbJsonLd from "@/app/components/BreadcrumbJsonLd";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Curriculum — Digital Carpentry",
+  description:
+    "Explore the codeDojo curriculum: from how websites work to backend architecture, deployment, and the philosophy of software mastery. A path of digital carpentry.",
+  openGraph: {
+    title: "Curriculum — codeDojo",
+    description:
+      "Master web development through the Shuhari philosophy. Six paths from Initiate to Adept.",
+    url: "https://codedojo.motionukict.com/curriculum",
+  },
+};
 
 export default function CurriculumPage() {
   return (
     <main className="relative min-h-screen pt-32 pb-20 px-6 md:px-12">
       <DojoBackground />
+      <BreadcrumbJsonLd
+        items={[
+          { position: 1, name: "Home", url: "https://codedojo.motionukict.com" },
+          { position: 2, name: "Curriculum", url: "https://codedojo.motionukict.com/curriculum" },
+        ]}
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto mb-24">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
